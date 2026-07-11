@@ -21,9 +21,12 @@ It measures latency, success rate, and tool-routing accuracy per agent type acro
 
 `CodeAgent` generates Python loops and batches all calls in one step. This is efficient but brittle since it has the chance of the max blast radius. With slight varance in temperature, the probability of python syntax getting jumbled up or logic being wrong causes the agent to get into infinite loops that my LLM model couldn't handle. In the experiements I ran, it was able to route with 90% accuracy. 
 
-`ToolCallingAgent` fabricated prices for 2/5 restaurants. 
+`ToolCallingAgent` fabricated prices 2/5 times. 
 
-How your local setup performs depends heavily depends on the task. A well-defined system prompt goes a long way. While I had the best results with CodeAgents, their high blast radius can make them unreliable in some cases. Next, I want to see the results of combining deterministic validation steps with a coding agent.
+How your local setup performs depends heavily depends on the task. A well-defined system prompt goes a long way. While I had the best results with CodeAgents, their high blast radius can make them unreliable in some cases. While conventially, for small local LLMs, ToolCallingAgents are thought to give better outputs my results differ. It could be because I used a model specialized for coding i.e the 
+`qwen2.5-coder:14b`.
+
+Next, I want to see the results of combining deterministic validation steps with a coding agent.
 ## Setup
 
 ```bash
