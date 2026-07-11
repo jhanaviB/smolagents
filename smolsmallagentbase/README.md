@@ -1,13 +1,15 @@
 # ToolCallingAgent vs CodeAgent — Compare both with a local LLM
 
 This code contains a quick experiment (n = 10) to compare a ToolCallingAgent with a CodeAgent. Both the agents are run on a 16GB base M4 mac model.
-Given how constrained the hardware is, I did not expect either of the agents to perform too well. I was more interested in seeing _how_ things failed instead of when.
+Given how constrained the hardware is, I did not expect either of the agents to perform too well. I was more interested in seeing _how_ things failed instead of ascertain when.
+
+The agents were given a web search tool and deterministic functions. I wanted to see if the agent was smart enough to understand when to use the deterministic functions and how varying temp or the agent type changed that.
 
 ## What it does
 
 Runs a temperature sweep across `ToolCallingAgent` and `CodeAgent` on the same task:
 1. Web search to find the best pizza places in Seattle!
-2. Call `get_price_tier(restaurant)` for each result. (This function is a deterministic function to find the price tier of restaurants. It computes this via hashing the restaurant's name)
+2. Call `get_price_tier(restaurant)` for each result. (This function is a deterministic function to find the price tier of restaurants. It computes this via hashing the restaurant's name).
 3. Call `pizzas_in_budget(tier, budget)` thereafter to chain the output
 4. Produce a structured final answer
 
