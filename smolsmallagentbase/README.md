@@ -1,22 +1,22 @@
 # ToolCallingAgent vs CodeAgent — Compare both with a local LLM
 
-This code compares a ToolCallingAgent and a CodeAgent. Both the agents are run on a 16GB base M4 mac model.
-Given how constrained the hardware is, I did not expect either to perform too well. I wanted to understand _how_ things fail for both the agents.
+This code contains a quick experiment (n = 10) to compare a ToolCallingAgent with a CodeAgent. Both the agents are run on a 16GB base M4 mac model.
+Given how constrained the hardware is, I did not expect either of the agents to perform too well. I was more interested in seeing _how_ things failed instead of when.
 
 ## What it does
 
 Runs a temperature sweep across `ToolCallingAgent` and `CodeAgent` on the same task:
-1. Web search for top Seattle pizza restaurants
-2. Call `get_price_tier(restaurant)` for each result
-3. Call `pizzas_in_budget(tier, budget)` to chain the output
+1. Web search to find the best pizza places in Seattle!
+2. Call `get_price_tier(restaurant)` for each result. (This function is a deterministic function to find the price tier of restaurants. It computes this via hashing the restaurant's name)
+3. Call `pizzas_in_budget(tier, budget)` thereafter to chain the output
 4. Produce a structured final answer
 
-Measures latency, success rate, and tool-routing accuracy per agent type across temperatures.
+It measures latency, success rate, and tool-routing accuracy per agent type across temperatures.
 
 ## Key finding
 
-`ToolCallingAgent` makes one JSON tool call per step — needs `max_steps ≥ 12` for this task.  
-`CodeAgent` generates Python loops — batches all calls in one step, efficient but brittle at extreme temperatures.
+`ToolCallingAgent` makes one JSON tool call per step. This performed reasonably well in all cases. Never a stellar performance though!
+`CodeAgent` generates Python loops and batches all calls in one step. This is efficient but brittle at extreme temperatures. With slight varance in temperature, the probability of python syntax getting jumbled up or logic being wrong causes the agent to get into infinite loops that my lLM model couldn't handle.
 
 ## Setup
 
@@ -39,8 +39,6 @@ Requires [Ollama](https://ollama.com) running locally with `qwen2.5-coder:14b` p
 SWEEP_PARAMS=temperature TEMP_VALUES=0.0,0.3,0.7 SWEEP_RUNS=5 \
 MODEL_TIMEOUT_SECONDS=60 python login.py
 ```
-
-Results write to `metrics_output/` after every completed run pair — safe to Ctrl+C at any time.
 
 ## Env vars
 
