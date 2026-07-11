@@ -1,0 +1,351 @@
+{
+  "model": "ollama/qwen2.5-coder:14b",
+  "sweep_runs": 2,
+  "baseline": {
+    "temperature": 0.1,
+    "num_ctx": 8192,
+    "num_batch": 256,
+    "num_predict": 512
+  },
+  "task": "You are helping plan a group pizza outing in Seattle. Step 1: Use web_search to find the top 5 pizza restaurants in Seattle right now. Step 2: For EACH of the 5 restaurants, call get_price_tier with the restaurant name to find out whether it is $, $$, or $$$. Step 3: For EACH of the 5 restaurants, call pizzas_in_budget with the price tier you just got from get_price_tier and budget=100 to calculate how many whole pizzas $100 buys. Do NOT estimate prices or do arithmetic yourself \u2014 you must call both tools for every restaurant. Step 4: Call final_answer with a markdown table: Restaurant | Price Tier | Pizzas for $100.",
+  "records": [
+    {
+      "agent": "tool_calling",
+      "parameter": "temperature",
+      "value": 0.0,
+      "success": true,
+      "duration_ms": 82367.87,
+      "error_type": "",
+      "classify_calls": 4,
+      "routing_accuracy": 0.4,
+      "options": {
+        "temperature": 0.0,
+        "num_ctx": 8192,
+        "num_batch": 256,
+        "num_predict": 512
+      }
+    },
+    {
+      "agent": "code_agent",
+      "parameter": "temperature",
+      "value": 0.0,
+      "success": true,
+      "duration_ms": 155980.12,
+      "error_type": "",
+      "classify_calls": 10,
+      "routing_accuracy": 1.0,
+      "options": {
+        "temperature": 0.0,
+        "num_ctx": 8192,
+        "num_batch": 256,
+        "num_predict": 512
+      }
+    },
+    {
+      "agent": "tool_calling",
+      "parameter": "temperature",
+      "value": 0.0,
+      "success": true,
+      "duration_ms": 89017.14,
+      "error_type": "",
+      "classify_calls": 4,
+      "routing_accuracy": 0.4,
+      "options": {
+        "temperature": 0.0,
+        "num_ctx": 8192,
+        "num_batch": 256,
+        "num_predict": 512
+      }
+    },
+    {
+      "agent": "code_agent",
+      "parameter": "temperature",
+      "value": 0.0,
+      "success": true,
+      "duration_ms": 160957.61,
+      "error_type": "",
+      "classify_calls": 10,
+      "routing_accuracy": 1.0,
+      "options": {
+        "temperature": 0.0,
+        "num_ctx": 8192,
+        "num_batch": 256,
+        "num_predict": 512
+      }
+    },
+    {
+      "agent": "tool_calling",
+      "parameter": "temperature",
+      "value": 0.3,
+      "success": true,
+      "duration_ms": 86084.78,
+      "error_type": "",
+      "classify_calls": 4,
+      "routing_accuracy": 0.4,
+      "options": {
+        "temperature": 0.3,
+        "num_ctx": 8192,
+        "num_batch": 256,
+        "num_predict": 512
+      }
+    },
+    {
+      "agent": "code_agent",
+      "parameter": "temperature",
+      "value": 0.3,
+      "success": false,
+      "duration_ms": 60069.6,
+      "error_type": "AgentGenerationError",
+      "classify_calls": 0,
+      "routing_accuracy": 0.0,
+      "options": {
+        "temperature": 0.3,
+        "num_ctx": 8192,
+        "num_batch": 256,
+        "num_predict": 512
+      }
+    },
+    {
+      "agent": "tool_calling",
+      "parameter": "temperature",
+      "value": 0.3,
+      "success": true,
+      "duration_ms": 105461.67,
+      "error_type": "",
+      "classify_calls": 6,
+      "routing_accuracy": 0.6,
+      "options": {
+        "temperature": 0.3,
+        "num_ctx": 8192,
+        "num_batch": 256,
+        "num_predict": 512
+      }
+    },
+    {
+      "agent": "code_agent",
+      "parameter": "temperature",
+      "value": 0.3,
+      "success": false,
+      "duration_ms": 60074.09,
+      "error_type": "AgentGenerationError",
+      "classify_calls": 0,
+      "routing_accuracy": 0.0,
+      "options": {
+        "temperature": 0.3,
+        "num_ctx": 8192,
+        "num_batch": 256,
+        "num_predict": 512
+      }
+    },
+    {
+      "agent": "tool_calling",
+      "parameter": "temperature",
+      "value": 0.5,
+      "success": true,
+      "duration_ms": 93985.59,
+      "error_type": "",
+      "classify_calls": 4,
+      "routing_accuracy": 0.4,
+      "options": {
+        "temperature": 0.5,
+        "num_ctx": 8192,
+        "num_batch": 256,
+        "num_predict": 512
+      }
+    },
+    {
+      "agent": "code_agent",
+      "parameter": "temperature",
+      "value": 0.5,
+      "success": false,
+      "duration_ms": 60068.05,
+      "error_type": "AgentGenerationError",
+      "classify_calls": 0,
+      "routing_accuracy": 0.0,
+      "options": {
+        "temperature": 0.5,
+        "num_ctx": 8192,
+        "num_batch": 256,
+        "num_predict": 512
+      }
+    },
+    {
+      "agent": "tool_calling",
+      "parameter": "temperature",
+      "value": 0.5,
+      "success": true,
+      "duration_ms": 87890.26,
+      "error_type": "",
+      "classify_calls": 4,
+      "routing_accuracy": 0.4,
+      "options": {
+        "temperature": 0.5,
+        "num_ctx": 8192,
+        "num_batch": 256,
+        "num_predict": 512
+      }
+    },
+    {
+      "agent": "code_agent",
+      "parameter": "temperature",
+      "value": 0.5,
+      "success": false,
+      "duration_ms": 60049.68,
+      "error_type": "AgentGenerationError",
+      "classify_calls": 0,
+      "routing_accuracy": 0.0,
+      "options": {
+        "temperature": 0.5,
+        "num_ctx": 8192,
+        "num_batch": 256,
+        "num_predict": 512
+      }
+    },
+    {
+      "agent": "tool_calling",
+      "parameter": "temperature",
+      "value": 0.7,
+      "success": true,
+      "duration_ms": 100574.58,
+      "error_type": "",
+      "classify_calls": 6,
+      "routing_accuracy": 0.6,
+      "options": {
+        "temperature": 0.7,
+        "num_ctx": 8192,
+        "num_batch": 256,
+        "num_predict": 512
+      }
+    },
+    {
+      "agent": "code_agent",
+      "parameter": "temperature",
+      "value": 0.7,
+      "success": true,
+      "duration_ms": 159886.57,
+      "error_type": "",
+      "classify_calls": 10,
+      "routing_accuracy": 1.0,
+      "options": {
+        "temperature": 0.7,
+        "num_ctx": 8192,
+        "num_batch": 256,
+        "num_predict": 512
+      }
+    },
+    {
+      "agent": "tool_calling",
+      "parameter": "temperature",
+      "value": 0.7,
+      "success": true,
+      "duration_ms": 102642.38,
+      "error_type": "",
+      "classify_calls": 4,
+      "routing_accuracy": 0.4,
+      "options": {
+        "temperature": 0.7,
+        "num_ctx": 8192,
+        "num_batch": 256,
+        "num_predict": 512
+      }
+    },
+    {
+      "agent": "code_agent",
+      "parameter": "temperature",
+      "value": 0.7,
+      "success": false,
+      "duration_ms": 121070.93,
+      "error_type": "AgentGenerationError",
+      "classify_calls": 0,
+      "routing_accuracy": 0.0,
+      "options": {
+        "temperature": 0.7,
+        "num_ctx": 8192,
+        "num_batch": 256,
+        "num_predict": 512
+      }
+    }
+  ],
+  "summary": [
+    {
+      "parameter": "temperature",
+      "value": "0.0",
+      "agent": "code_agent",
+      "runs": 2,
+      "latency_mean_ms": 158468.86,
+      "latency_spread_ms": 2488.74,
+      "failure_rate": 0.0,
+      "routing_accuracy": 1.0
+    },
+    {
+      "parameter": "temperature",
+      "value": "0.0",
+      "agent": "tool_calling",
+      "runs": 2,
+      "latency_mean_ms": 85692.51,
+      "latency_spread_ms": 3324.64,
+      "failure_rate": 0.0,
+      "routing_accuracy": 0.4
+    },
+    {
+      "parameter": "temperature",
+      "value": "0.3",
+      "agent": "code_agent",
+      "runs": 2,
+      "latency_mean_ms": 60071.85,
+      "latency_spread_ms": 2.24,
+      "failure_rate": 1.0,
+      "routing_accuracy": 0.0
+    },
+    {
+      "parameter": "temperature",
+      "value": "0.3",
+      "agent": "tool_calling",
+      "runs": 2,
+      "latency_mean_ms": 95773.23,
+      "latency_spread_ms": 9688.44,
+      "failure_rate": 0.0,
+      "routing_accuracy": 0.5
+    },
+    {
+      "parameter": "temperature",
+      "value": "0.5",
+      "agent": "code_agent",
+      "runs": 2,
+      "latency_mean_ms": 60058.87,
+      "latency_spread_ms": 9.19,
+      "failure_rate": 1.0,
+      "routing_accuracy": 0.0
+    },
+    {
+      "parameter": "temperature",
+      "value": "0.5",
+      "agent": "tool_calling",
+      "runs": 2,
+      "latency_mean_ms": 90937.92,
+      "latency_spread_ms": 3047.67,
+      "failure_rate": 0.0,
+      "routing_accuracy": 0.4
+    },
+    {
+      "parameter": "temperature",
+      "value": "0.7",
+      "agent": "code_agent",
+      "runs": 2,
+      "latency_mean_ms": 140478.75,
+      "latency_spread_ms": 19407.82,
+      "failure_rate": 0.5,
+      "routing_accuracy": 0.5
+    },
+    {
+      "parameter": "temperature",
+      "value": "0.7",
+      "agent": "tool_calling",
+      "runs": 2,
+      "latency_mean_ms": 101608.48,
+      "latency_spread_ms": 1033.9,
+      "failure_rate": 0.0,
+      "routing_accuracy": 0.5
+    }
+  ]
+}

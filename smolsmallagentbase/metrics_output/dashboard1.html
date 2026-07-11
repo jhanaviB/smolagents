@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Agent Metrics Dashboard</title>
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #0b1220;
+            --panel: #121b2f;
+            --text: #e8edf7;
+            --muted: #9aa7bd;
+            --accent: #6ee7ff;
+            --accent2: #8b5cf6;
+        }
+        body { margin: 0; font-family: Inter, system-ui, sans-serif; background: radial-gradient(circle at top, #17213b, var(--bg)); color: var(--text); }
+        .wrap { max-width: 1100px; margin: 0 auto; padding: 40px 24px 56px; }
+        h1 { margin: 0 0 8px; font-size: 2.25rem; }
+        .sub { color: var(--muted); margin-bottom: 28px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+        .card { background: rgba(18,27,47,0.88); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; padding: 20px; box-shadow: 0 12px 40px rgba(0,0,0,.24); }
+        .card h2 { margin: 0 0 16px; font-size: 1.15rem; }
+        .metric { display: flex; justify-content: space-between; margin: 10px 0; color: var(--muted); }
+        .metric strong { color: var(--text); }
+        .bar { height: 10px; border-radius: 999px; background: rgba(255,255,255,0.08); overflow: hidden; margin-top: 16px; }
+        .bar > div { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+        .footer { margin-top: 24px; color: var(--muted); font-size: .95rem; }
+        code { background: rgba(255,255,255,.08); padding: 2px 6px; border-radius: 6px; }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <h1>Agent Metrics Dashboard</h1>
+        <div class="sub">Source: local Ollama comparison run · model: <code>ollama/qwen2.5-coder:14b</code> · runs per agent: <code>1</code></div>
+        <div class="grid">
+                <section class="card">
+                    <h2>tool_calling</h2>
+                    <div class="metric"><span>Success rate</span><strong>1.00</strong></div>
+                    <div class="metric"><span>Avg latency (ms)</span><strong>55364.18</strong></div>
+                    <div class="metric"><span>Fallback rate</span><strong>0.00</strong></div>
+                    <div class="bar"><div style="width:100%"></div></div>
+                </section>
+                
+
+                <section class="card">
+                    <h2>code_agent</h2>
+                    <div class="metric"><span>Success rate</span><strong>1.00</strong></div>
+                    <div class="metric"><span>Avg latency (ms)</span><strong>101672.06</strong></div>
+                    <div class="metric"><span>Fallback rate</span><strong>0.00</strong></div>
+                    <div class="bar"><div style="width:100%"></div></div>
+                </section>
+                </div>
+        <div class="footer">Tip: open this file in a browser and take a screenshot for your post.</div>
+    </div>
+</body>
+</html>

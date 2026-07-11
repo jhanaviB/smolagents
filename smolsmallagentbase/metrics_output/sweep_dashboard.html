@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Agent Sweep Dashboard</title>
+  <style>
+    :root{--bg:#0f172a;--text:#e5e7eb;--muted:#94a3b8;--a:#60a5fa;--b:#a78bfa;}
+    body{margin:0;background:linear-gradient(180deg,#0b1222,var(--bg));color:var(--text);font-family:ui-sans-serif,system-ui,sans-serif;}
+    .wrap{max-width:1080px;margin:0 auto;padding:32px 20px 56px;}
+    h1{margin:0 0 6px;font-size:1.8rem;} h2{font-size:1rem;color:var(--muted);margin:0 0 12px;}
+    .sub{color:var(--muted);margin-bottom:20px;font-size:.88rem;}
+    .card{background:rgba(17,24,39,.85);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px;margin-bottom:14px;}
+    table{width:100%;border-collapse:collapse;font-size:13px;}
+    th,td{padding:8px 6px;border-bottom:1px solid rgba(255,255,255,.07);text-align:left;vertical-align:middle;}
+    th{color:var(--muted);font-size:11px;text-transform:uppercase;font-weight:600;}
+    .track{position:relative;background:rgba(255,255,255,.08);border-radius:999px;height:8px;overflow:hidden;margin-top:4px;}
+    .bar{height:100%;background:linear-gradient(90deg,var(--a),var(--b));}
+    .bar.good{background:linear-gradient(90deg,#22c55e,#16a34a);}
+    .bar.bad{background:linear-gradient(90deg,#f59e0b,#ef4444);}
+    .spread{position:absolute;right:0;top:0;bottom:0;background:rgba(245,158,11,.4);}
+    .tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;}
+    .tag.tc{background:rgba(96,165,250,.18);color:#93c5fd;}
+    .tag.ca{background:rgba(167,139,250,.18);color:#c4b5fd;}
+    .chart-row{display:grid;grid-template-columns:190px 1fr 48px;gap:10px;align-items:center;margin:8px 0;}
+    .chart-label{color:var(--muted);font-size:.83rem;}
+    .chart-val{font-size:.83rem;text-align:right;}
+    .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.83rem;color:var(--muted);margin-bottom:14px;}
+    .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px;vertical-align:middle;}
+    code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:6px;font-size:.83rem;}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <h1>ToolCallingAgent vs CodeAgent — Routing Experiment</h1>
+  <div class="sub">Model: <code>ollama/qwen2.5-coder:14b</code> &middot; Runs/config: <code>2</code> &middot; One-variable-at-a-time &middot; Task: find restaurants → get_price_tier → pizzas_in_budget</div>
+  <div class="legend">
+    <span><span class="dot" style="background:var(--a)"></span>Latency bar</span>
+    <span><span class="dot" style="background:rgba(245,158,11,.7)"></span>Latency spread</span>
+    <span><span class="dot" style="background:#22c55e"></span>Good routing / success (≥0.5)</span>
+    <span><span class="dot" style="background:#ef4444"></span>Poor routing / failures (&lt;0.5)</span>
+  </div>
+  <section class="card">
+    <h2>Latency mean±spread &nbsp;&bull;&nbsp; Tool-routing accuracy &nbsp;&bull;&nbsp; Success rate</h2>
+    <table>
+      <thead><tr>
+        <th>Param</th><th>Value</th><th>Agent</th>
+        <th>Latency mean±spread</th>
+        <th>Routing accuracy<br><span style="font-weight:400;font-size:10px">(get_price_tier + pizzas_in_budget) / 10</span></th>
+        <th>Success rate</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td>temperature</td>
+          <td>0.0</td>
+          <td><span class="tag ca">code_agent</span></td>
+          <td>158469 ± 2489 ms
+            <div class="track">
+              <div class="bar" style="width:100%"></div>
+              <div class="spread" style="width:2%"></div>
+            </div></td>
+          <td>1.00
+            <div class="track"><div class="bar good" style="width:100%"></div></div>
+          </td>
+          <td>1.00
+            <div class="track"><div class="bar good" style="width:100%"></div></div>
+          </td>
+        </tr>
+        
+
+        <tr>
+          <td>temperature</td>
+          <td>0.0</td>
+          <td><span class="tag tc">tool_calling</span></td>
+          <td>85693 ± 3325 ms
+            <div class="track">
+              <div class="bar" style="width:54%"></div>
+              <div class="spread" style="width:2%"></div>
+            </div></td>
+          <td>0.40
+            <div class="track"><div class="bar bad" style="width:40%"></div></div>
+          </td>
+          <td>1.00
+            <div class="track"><div class="bar good" style="width:100%"></div></div>
+          </td>
+        </tr>
+        
+
+        <tr>
+          <td>temperature</td>
+          <td>0.3</td>
+          <td><span class="tag ca">code_agent</span></td>
+          <td>60072 ± 2 ms
+            <div class="track">
+              <div class="bar" style="width:38%"></div>
+              <div class="spread" style="width:0%"></div>
+            </div></td>
+          <td>0.00
+            <div class="track"><div class="bar bad" style="width:0%"></div></div>
+          </td>
+          <td>0.00
+            <div class="track"><div class="bar bad" style="width:0%"></div></div>
+          </td>
+        </tr>
+        
+
+        <tr>
+          <td>temperature</td>
+          <td>0.3</td>
+          <td><span class="tag tc">tool_calling</span></td>
+          <td>95773 ± 9688 ms
+            <div class="track">
+              <div class="bar" style="width:60%"></div>
+              <div class="spread" style="width:6%"></div>
+            </div></td>
+          <td>0.50
+            <div class="track"><div class="bar good" style="width:50%"></div></div>
+          </td>
+          <td>1.00
+            <div class="track"><div class="bar good" style="width:100%"></div></div>
+          </td>
+        </tr>
+        
+
+        <tr>
+          <td>temperature</td>
+          <td>0.5</td>
+          <td><span class="tag ca">code_agent</span></td>
+          <td>60059 ± 9 ms
+            <div class="track">
+              <div class="bar" style="width:38%"></div>
+              <div class="spread" style="width:0%"></div>
+            </div></td>
+          <td>0.00
+            <div class="track"><div class="bar bad" style="width:0%"></div></div>
+          </td>
+          <td>0.00
+            <div class="track"><div class="bar bad" style="width:0%"></div></div>
+          </td>
+        </tr>
+        
+
+        <tr>
+          <td>temperature</td>
+          <td>0.5</td>
+          <td><span class="tag tc">tool_calling</span></td>
+          <td>90938 ± 3048 ms
+            <div class="track">
+              <div class="bar" style="width:57%"></div>
+              <div class="spread" style="width:2%"></div>
+            </div></td>
+          <td>0.40
+            <div class="track"><div class="bar bad" style="width:40%"></div></div>
+          </td>
+          <td>1.00
+            <div class="track"><div class="bar good" style="width:100%"></div></div>
+          </td>
+        </tr>
+        
+
+        <tr>
+          <td>temperature</td>
+          <td>0.7</td>
+          <td><span class="tag ca">code_agent</span></td>
+          <td>140479 ± 19408 ms
+            <div class="track">
+              <div class="bar" style="width:89%"></div>
+              <div class="spread" style="width:12%"></div>
+            </div></td>
+          <td>0.50
+            <div class="track"><div class="bar good" style="width:50%"></div></div>
+          </td>
+          <td>0.50
+            <div class="track"><div class="bar bad" style="width:50%"></div></div>
+          </td>
+        </tr>
+        
+
+        <tr>
+          <td>temperature</td>
+          <td>0.7</td>
+          <td><span class="tag tc">tool_calling</span></td>
+          <td>101608 ± 1034 ms
+            <div class="track">
+              <div class="bar" style="width:64%"></div>
+              <div class="spread" style="width:1%"></div>
+            </div></td>
+          <td>0.50
+            <div class="track"><div class="bar good" style="width:50%"></div></div>
+          </td>
+          <td>1.00
+            <div class="track"><div class="bar good" style="width:100%"></div></div>
+          </td>
+        </tr>
+        </tbody>
+    </table>
+  </section>
+  <section class="card">
+    <h2>Temperature → tool-routing accuracy per agent</h2>
+    <p style="color:var(--muted);font-size:.83rem;margin:0 0 10px">
+      1.0 = agent called both <code>get_price_tier</code> and <code>pizzas_in_budget</code> for all 5 restaurants.
+      Shows which agent type maintains the full tool chain as temperature increases.
+    </p>
+    
+        <div class="chart-row">
+          <span class="chart-label">code_agent T=0.0</span>
+          <div class="track"><div class="bar good" style="width:100%"></div></div>
+          <span class="chart-val">1.00</span>
+        </div>
+        
+
+        <div class="chart-row">
+          <span class="chart-label">tool_calling T=0.0</span>
+          <div class="track"><div class="bar bad" style="width:40%"></div></div>
+          <span class="chart-val">0.40</span>
+        </div>
+        
+
+        <div class="chart-row">
+          <span class="chart-label">code_agent T=0.3</span>
+          <div class="track"><div class="bar bad" style="width:0%"></div></div>
+          <span class="chart-val">0.00</span>
+        </div>
+        
+
+        <div class="chart-row">
+          <span class="chart-label">tool_calling T=0.3</span>
+          <div class="track"><div class="bar good" style="width:50%"></div></div>
+          <span class="chart-val">0.50</span>
+        </div>
+        
+
+        <div class="chart-row">
+          <span class="chart-label">code_agent T=0.5</span>
+          <div class="track"><div class="bar bad" style="width:0%"></div></div>
+          <span class="chart-val">0.00</span>
+        </div>
+        
+
+        <div class="chart-row">
+          <span class="chart-label">tool_calling T=0.5</span>
+          <div class="track"><div class="bar bad" style="width:40%"></div></div>
+          <span class="chart-val">0.40</span>
+        </div>
+        
+
+        <div class="chart-row">
+          <span class="chart-label">code_agent T=0.7</span>
+          <div class="track"><div class="bar good" style="width:50%"></div></div>
+          <span class="chart-val">0.50</span>
+        </div>
+        
+
+        <div class="chart-row">
+          <span class="chart-label">tool_calling T=0.7</span>
+          <div class="track"><div class="bar good" style="width:50%"></div></div>
+          <span class="chart-val">0.50</span>
+        </div>
+        
+  </section>
+  <section class="card">
+    <p style="color:var(--muted);font-size:.83rem;margin:0">
+      Screenshot this page for your post. Raw data: <code>sweep_results.json</code>.
+    </p>
+  </section>
+</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+{
+  "runs": [
+    {
+      "agent": "tool_calling",
+      "success": true,
+      "used_fallback": false,
+      "duration_ms": 55364.18,
+      "error_type": "",
+      "result_preview": "1. The Honey and Spice and Everything Nice at Spark Pizza\n2. Delancey\n3. MOD pizza\n4. Serious Pie Downtown\n5. Rocco's\n6. Pizzeria La Rocca\n7. Elemental Pizza\n8. In Pizza We Crust\n9. Ananas Pizzeria\n10. MOTO Pizza - West Seattle"
+    },
+    {
+      "agent": "code_agent",
+      "success": true,
+      "used_fallback": false,
+      "duration_ms": 101672.06,
+      "error_type": "",
+      "result_preview": "1. Pizzeria Pulcinella\n2. My Friend Derek's\n3. Nirvana\n4. Post Alley Pizza\n5. Tivoli\n6. Sassafras Pizza\n7. Biscuit Love\n8. The Daily Slice\n9. Cicero's Pizza\n10. Lombardi's"
+    }
+  ],
+  "summary": [
+    {
+      "agent": "tool_calling",
+      "success_rate": 1.0,
+      "avg_latency_ms": 55364.18,
+      "fallback_rate": 0.0,
+      "runs": 1
+    },
+    {
+      "agent": "code_agent",
+      "success_rate": 1.0,
+      "avg_latency_ms": 101672.06,
+      "fallback_rate": 0.0,
+      "runs": 1
+    }
+  ]
+}
