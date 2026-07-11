@@ -1,0 +1,6 @@
+smolsmallagentbase/metric_output/*
+retrievalwebsearch/websearch.py
+
+.env
+.gitignore
+.DS_Store
