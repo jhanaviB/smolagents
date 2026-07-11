@@ -18,8 +18,12 @@ It measures latency, success rate, and tool-routing accuracy per agent type acro
 ## Key finding
 
 `ToolCallingAgent` makes one JSON tool call per step. This performed _ok_ in all cases. Around ~40% accuracy, i.e it only routed correctly for 2 restaurants out of 5 Never a stellar performance though!
-`CodeAgent` generates Python loops and batches all calls in one step. This is efficient but brittle but has the chance of the max blast radius. With slight varance in temperature, the probability of python syntax getting jumbled up or logic being wrong causes the agent to get into infinite loops that my LLM model couldn't handle.
 
+`CodeAgent` generates Python loops and batches all calls in one step. This is efficient but brittle since it has the chance of the max blast radius. With slight varance in temperature, the probability of python syntax getting jumbled up or logic being wrong causes the agent to get into infinite loops that my LLM model couldn't handle. In the experiements I ran, it was able to route with 90% accuracy. 
+
+`ToolCallingAgent` fabricated prices for 2/5 restaurants. 
+
+How your local setup performs depends heavily depends on the task. A well-defined system prompt goes a long way. While I had the best results with CodeAgents, their high blast radius can make them unreliable in some cases. Next, I want to see the results of combining deterministic validation steps with a coding agent.
 ## Setup
 
 ```bash
@@ -52,3 +56,4 @@ MODEL_TIMEOUT_SECONDS=60 python login.py
 | `SWEEP_RUNS` | `2` | Runs per config |
 | `MODEL_TIMEOUT_SECONDS` | `90` | Per-request timeout |
 | `OTEL_ENABLED` | `0` | Enable OpenTelemetry tracing |
+
