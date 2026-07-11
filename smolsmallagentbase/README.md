@@ -1,6 +1,7 @@
-# ToolCallingAgent vs CodeAgent — Parameter Sweep
+# ToolCallingAgent vs CodeAgent — Compare both with a local LLM
 
-A local experiment harness comparing two smolagents agent architectures on a chained multi-step task.
+This code compares a ToolCallingAgent and a CodeAgent. Both the agents are run on a 16GB base M4 mac model.
+Given how constrained the hardware is, I did not expect either to perform too well. I wanted to understand _how_ things fail for both the agents.
 
 ## What it does
 
