@@ -17,8 +17,8 @@ It measures latency, success rate, and tool-routing accuracy per agent type acro
 
 ## Key finding
 
-`ToolCallingAgent` makes one JSON tool call per step. This performed reasonably well in all cases. Never a stellar performance though!
-`CodeAgent` generates Python loops and batches all calls in one step. This is efficient but brittle at extreme temperatures. With slight varance in temperature, the probability of python syntax getting jumbled up or logic being wrong causes the agent to get into infinite loops that my lLM model couldn't handle.
+`ToolCallingAgent` makes one JSON tool call per step. This performed _ok_ in all cases. Around ~40% accuracy, i.e it only routed correctly for 2 restaurants out of 5 Never a stellar performance though!
+`CodeAgent` generates Python loops and batches all calls in one step. This is efficient but brittle but has the chance of the max blast radius. With slight varance in temperature, the probability of python syntax getting jumbled up or logic being wrong causes the agent to get into infinite loops that my LLM model couldn't handle.
 
 ## Setup
 
