@@ -7,7 +7,7 @@ This repo contains some code from my experiements with smolagents :)
 ### `smolsmallagentbase/`
 This is built with [smolagents](https://github.com/huggingface/smolagents) and local Ollama models.
 
-Benchmarks `ToolCallingAgent` vs `CodeAgent` on a chained multi-step pizza planning task. Runs parameter sweeps across temperature, context size, and batch settings, measuring latency, success rate, and tool-routing accuracy. Outputs results to `metrics_output/`.
+Benchmarks `ToolCallingAgent` vs `CodeAgent` on a simple chained multi-step task. Runs parameter sweeps across temperature, context size, and batch settings, measuring latency, success rate, and tool-routing accuracy. Outputs results to `metrics_output/`.
 
 ### `retrievalwebsearch/`
 Two experiments using web search with smolagents:
