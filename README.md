@@ -1,6 +1,6 @@
 # smolagents experiments
 
-This repo contains some code from my experiements with smolagents, langchain, langgraph and RAG :)
+This repo contains some code from my experiements with smolagents :)
 
 ## Projects
 
