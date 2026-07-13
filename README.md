@@ -1,6 +1,6 @@
 # smolagents experiments
 
-This repo contains some code from my experiements with smolagents :)
+This repo contains some code from my smolagents sessions :)
 
 ## Projects
 
